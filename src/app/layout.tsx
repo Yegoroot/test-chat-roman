@@ -1,8 +1,16 @@
 import React from 'react';
+import { Jost } from 'next/font/google'
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 
+
+const jost = Jost({
+  subsets: ['latin', 'cyrillic'],
+  display: 'swap',
+})
+ 
+
 const RootLayout = ({ children }: React.PropsWithChildren) => (
-  <html lang="en">
+  <html lang="en" className={jost.className}>
     <body>
       <AntdRegistry>{children}</AntdRegistry>
     </body>
