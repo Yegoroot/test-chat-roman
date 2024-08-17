@@ -1,21 +1,74 @@
 'use client'
 
-import { Participant } from '@/components/Participants'
 import { create } from 'zustand'
 
+export type Message = {
+  id: string,
+  text: string,
+  me?: boolean,
+  date: string
+  user: string
+}
 interface TeamState {
   name: string
   lastseen: string
-  participants: Participant[]
+  participants: string[]
+  messages: Message[]
 }
 
 export const useTeam = create<TeamState>(() => ({
   name: '🦄 Team Unicorns',
   lastseen: '2024-08-17 19:18:17.040+03:00',
-  participants: [
-    { avatar: 'https://api.dicebear.com/7.x/miniavs/svg?seed=1', name: 'Leopolt', id: '0001' },
-    { avatar: 'https://api.dicebear.com/7.x/miniavs/svg?seed=2', name: 'Stepan', id: '0002' },
-    { avatar: 'https://api.dicebear.com/7.x/miniavs/svg?seed=5', name: 'Tiger', id: '0003' },
-    { name: 'Vasiliy', id: '0004' },
-  ],
+  participants: ['001', '002', '003', '004', '005'],
+  messages: [
+    { id: '101',
+      text: 'Hi team ✋',
+      me: true,
+      user: '001',
+      date: '2024-08-17 11:31:00.040+03:00',
+    },
+    { id: '102',
+      text: 'Anyone on for lunch today',
+      me: true,
+      user: '001',
+      date: '2024-08-17 11:31:40.040+03:00'
+    },
+    { id: '103',
+      text: "I'm down! Any ideas??",
+      date: '2024-08-17 11:35:17.040+03:00',
+      user: '002'
+    },
+    { id: '104',
+      text: 'I am down for whatever!',
+      me: true,
+      user: '001',
+      date: '2024-08-17 11:36:40.040+03:00'
+    },
+    { id: '105',
+      text: 'I was thinking the cafe downtown',
+      user: '003',
+      date: '2024-08-17 11:45:40.040+03:00'
+    },
+    { id: '106',
+      text: 'But limited vegan options @Janet!',
+      user: '003',
+      date: '2024-08-17 11:46:40.040+03:00'
+    },
+    { id: '107',
+      text: 'Agreed',
+      me: true,
+      user: '001',
+      date: '2024-08-17 11:52:40.040+03:00'
+    },
+    { id: '108',
+      text: 'That works- I was actuallu planning to get a smoothie anyways',
+      user: '004',
+      date: '2024-08-17 12:03:40.040+03:00'
+    },
+    { id: '109',
+      text: 'On for 12:30 PM then?',
+      user: '005',
+      date: '2024-08-17 12:04:40.040+03:00'
+    },
+  ]
 }))

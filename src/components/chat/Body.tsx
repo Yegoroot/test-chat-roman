@@ -1,12 +1,12 @@
-import { useBears } from '@/hooks/useBears'
+import { useTeam } from '@/hooks/useTeam'
+import { Flex } from 'antd'
+import { Message } from './Message'
 
 export const Body = () => {
-  const bears = useBears((state) => state.bears)
+  const messages = useTeam((state) => state.messages)
   return (
-    <h1>
-      {bears}
-      {' '}
-      around here...
-    </h1>
+    <Flex>
+      {messages.map((m) => <Message message={m} />)}
+    </Flex>
   )
 }

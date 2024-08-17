@@ -2,17 +2,17 @@ import React from 'react'
 import { Avatar } from 'antd'
 
 import { stringToColor } from '@/utils/stringToColor'
+import { useContacts } from '@/hooks/useContacts'
 
-export interface Participant {
-  id: string,
-  name: string
-  avatar?: string
+
+export const Participants = ({ participants }: {participants: string[]}) => {
+  const contacts = useContacts((s) => s.contacts)
+  return (
+    <Avatar.Group style={{ alignItems: 'center' }}>
+      { participants.map((p) => {
+        const u = contacts[p]
+        return <Avatar src={u.avatar} key={u.id} style={{ backgroundColor: stringToColor(u.name) }}>{u.name[0]}</Avatar>
+      })}
+    </Avatar.Group>
+  )
 }
-
-export const Participants = ({ participants }: {participants: Participant[]}) => (
-  <Avatar.Group style={{ alignItems: 'center' }}>
-    { participants.map((p) => (
-      <Avatar src={p.avatar} key={p.id} style={{ backgroundColor: stringToColor(p.name) }}>{p.name[0]}</Avatar>
-    ))}
-  </Avatar.Group>
-)

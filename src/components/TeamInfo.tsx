@@ -13,7 +13,7 @@ const { Text, Title } = Typography
 
 export const TeamInfo = ({ lastseen, name }: Props) => (
   <Flex vertical>
-    <Title level={4} style={{ marginTop: 0 }}>{name}</Title>
+    <Title level={4} style={{ marginTop: 0, marginBottom: 4 }}>{name}</Title>
     <Text type="secondary">
       {`Last seen ${dayjs(lastseen).fromNow()} ago`}
     </Text>
