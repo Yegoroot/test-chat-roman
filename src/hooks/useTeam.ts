@@ -19,6 +19,8 @@ interface TeamState {
   messages: Message[]
   isTyping: string[]
   sendMessage: (m: Message, bottomRef: RefObject<HTMLDivElement>)=> void
+  editMessage: (id: string)=> void
+  deleteMessage: (id: string)=> void
 }
 
 export const useTeam = create<TeamState>((set) => ({
@@ -33,6 +35,12 @@ export const useTeam = create<TeamState>((set) => ({
     await imitationOfLoading()
     set((s) => ({ messages: [...s.messages, robotMessage] }))
     setTimeout(() => { if (bottomRef.current) { bottomRef.current.scrollIntoView({ behavior: 'smooth' }) } }, 100)
+  },
+  editMessage: (id: string) => {
+    console.log('edit', id)
+  },
+  deleteMessage: (id: string) => {
+    set((s) => ({ messages: s.messages.filter((m) => m.id !== id) }))
   },
   messages: [
     { id: '101',
