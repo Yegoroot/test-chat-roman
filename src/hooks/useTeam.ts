@@ -14,12 +14,16 @@ interface TeamState {
   lastseen: string
   participants: string[]
   messages: Message[]
+  sendMessage: (m: Message)=> void
 }
 
-export const useTeam = create<TeamState>(() => ({
+export const useTeam = create<TeamState>((set) => ({
   name: '🦄 Team Unicorns',
   lastseen: '2024-08-17 19:18:17.040+03:00',
   participants: ['001', '002', '003', '004', '005'],
+  sendMessage: (m: Message) => {
+    set((s) => ({ messages: [...s.messages, m] }))
+  },
   messages: [
     { id: '101',
       text: 'Hi team ✋',

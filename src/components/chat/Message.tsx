@@ -1,5 +1,6 @@
 import { Contact } from '@/hooks/useContacts'
 import { Message as IMessage } from '@/hooks/useTeam'
+import { stringToColor } from '@/utils/stringToColor'
 import { Avatar, Flex, Typography } from 'antd'
 import dayjs from 'dayjs'
 
@@ -13,7 +14,7 @@ interface Props {
 export const Message = ({ m, c }: Props) => (
   <Flex className={`message ${m.me ? 'message-right' : 'message-left'}`}>
     <Flex className="message__avatar">
-      <Avatar src={c.avatar}>{c.name[0]}</Avatar>
+      <Avatar src={c.avatar} style={{ backgroundColor: stringToColor(c.name) }}>{c.name[0]}</Avatar>
     </Flex>
     <Flex className="message__body">
       <Text>

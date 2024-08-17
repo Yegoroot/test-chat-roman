@@ -4,7 +4,6 @@ import { Avatar } from 'antd'
 import { stringToColor } from '@/utils/stringToColor'
 import { useContacts } from '@/hooks/useContacts'
 
-
 export const Participants = ({ participants }: {participants: string[]}) => {
   const contacts = useContacts((s) => s.contacts)
   return (
