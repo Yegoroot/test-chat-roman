@@ -1,12 +1,12 @@
 import { Flex } from 'antd'
-import { LegacyRef } from 'react'
+import { RefObject } from 'react'
 
 import { useTeam } from '@/hooks/useTeam'
 import { useContacts } from '@/hooks/useContacts'
 import { Message } from './Message'
 
 interface Props {
-  messagesEndRef: LegacyRef<HTMLDivElement>
+  messagesEndRef: RefObject<HTMLDivElement>
 }
 
 export const Body = ({ messagesEndRef }: Props) => {

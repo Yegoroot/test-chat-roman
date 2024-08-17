@@ -3,10 +3,10 @@ import { useTeam } from '@/hooks/useTeam'
 import { generateId } from '@/utils/generateId'
 import { FrownOutlined, SendOutlined } from '@ant-design/icons'
 import { Button, Flex, Input } from 'antd'
-import { LegacyRef, useState } from 'react'
+import { RefObject, useState } from 'react'
 
 interface Props {
-  messagesEndRef: LegacyRef<HTMLDivElement>
+  messagesEndRef: RefObject<HTMLDivElement>
 }
 
 export const Controls = ({ messagesEndRef }: Props) => {
@@ -14,16 +14,8 @@ export const Controls = ({ messagesEndRef }: Props) => {
   const sendMessage = useTeam((s) => s.sendMessage)
   const onChange = (e: any) => setText(e.target.value)
 
-  const scrollToBottom = () => {
-    setTimeout(() => {
-      // @ts-ignore
-      if (messagesEndRef && messagesEndRef.current) { messagesEndRef.current.scrollIntoView({ behavior: 'smooth' }) }
-    }, 100)
-  }
-
   const onSend = () => {
-    sendMessage({ id: generateId(), text, user: '001', me: true, date: new Date().toString() })
-    scrollToBottom()
+    sendMessage({ id: generateId(), text, user: '001', me: true, date: new Date().toString() }, messagesEndRef)
     setText('')
   }
 

@@ -1,5 +1,8 @@
 'use client'
 
+import { generateId } from '@/utils/generateId'
+import { imitationOfLoading } from '@/utils/sleep'
+import { RefObject } from 'react'
 import { create } from 'zustand'
 
 export type Message = {
@@ -14,15 +17,22 @@ interface TeamState {
   lastseen: string
   participants: string[]
   messages: Message[]
-  sendMessage: (m: Message)=> void
+  isTyping: string[]
+  sendMessage: (m: Message, bottomRef: RefObject<HTMLDivElement>)=> void
 }
 
 export const useTeam = create<TeamState>((set) => ({
   name: '🦄 Team Unicorns',
   lastseen: '2024-08-17 19:18:17.040+03:00',
   participants: ['001', '002', '003', '004', '005'],
-  sendMessage: (m: Message) => {
+  isTyping: ['005'],
+  sendMessage: async (m: Message, bottomRef: RefObject<HTMLDivElement>) => {
+    const robotMessage = { date: new Date().toString(), id: generateId(), text: 'Hello!', user: '005', }
     set((s) => ({ messages: [...s.messages, m] }))
+    setTimeout(() => { if (bottomRef.current) { bottomRef.current.scrollIntoView({ behavior: 'smooth' }) } }, 100)
+    await imitationOfLoading()
+    set((s) => ({ messages: [...s.messages, robotMessage] }))
+    setTimeout(() => { if (bottomRef.current) { bottomRef.current.scrollIntoView({ behavior: 'smooth' }) } }, 100)
   },
   messages: [
     { id: '101',
