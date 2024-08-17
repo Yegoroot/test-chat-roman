@@ -1,1 +1,1 @@
-export const generateId = () => Date.now().toString(16)
+export const generateId = (solt?: string) => Date.now().toString(16) + solt

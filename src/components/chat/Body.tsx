@@ -11,14 +11,13 @@ interface Props {
 }
 
 export const Body = ({ messagesEndRef }: Props) => {
-  const messages = useTeam((s) => s.messages)
-  const editMessage = useTeam((s) => s.editMessage)
-  const deleteMessage = useTeam((s) => s.deleteMessage)
+  const { messages, setActiveMessageId, deleteMessage, activeMessageId } = useTeam((s) => s)
+
   const contacts = useContacts((s) => s.contacts)
 
   const items = (m: IMessage) => ([
     {
-      label: <span onClick={() => editMessage(m.id)}>Edit</span>,
+      label: <span onClick={() => setActiveMessageId(m.id)}>Edit</span>,
       key: '0',
     },
     {
@@ -26,6 +25,8 @@ export const Body = ({ messagesEndRef }: Props) => {
       key: '1',
     }
   ]) as MenuProps['items']
+
+  console.log('mes', messages, activeMessageId)
 
   return (
     <Flex style={{ flexGrow: 1, flexDirection: 'column', paddingTop: 30, paddingBottom: 50, overflow: 'auto' }}>

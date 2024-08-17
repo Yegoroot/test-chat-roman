@@ -18,8 +18,10 @@ interface TeamState {
   participants: string[]
   messages: Message[]
   isTyping: string[]
+  activeMessageId: null | string
   sendMessage: (m: Message, bottomRef: RefObject<HTMLDivElement>)=> void
-  editMessage: (id: string)=> void
+  setActiveMessageId: (id: string)=> void
+  editMessage: (text: string) => void
   deleteMessage: (id: string)=> void
 }
 
@@ -28,16 +30,24 @@ export const useTeam = create<TeamState>((set) => ({
   lastseen: '2024-08-17 19:18:17.040+03:00',
   participants: ['001', '002', '003', '004', '005'],
   isTyping: ['005'],
+  activeMessageId: null,
   sendMessage: async (m: Message, bottomRef: RefObject<HTMLDivElement>) => {
-    const robotMessage = { date: new Date().toString(), id: generateId(), text: 'Hello!', user: '005', }
+    const robotMessage = { date: new Date().toString(), id: generateId('any'), text: 'Hello!', user: '005', }
     set((s) => ({ messages: [...s.messages, m] }))
     setTimeout(() => { if (bottomRef.current) { bottomRef.current.scrollIntoView({ behavior: 'smooth' }) } }, 100)
     await imitationOfLoading()
     set((s) => ({ messages: [...s.messages, robotMessage] }))
     setTimeout(() => { if (bottomRef.current) { bottomRef.current.scrollIntoView({ behavior: 'smooth' }) } }, 100)
   },
-  editMessage: (id: string) => {
-    console.log('edit', id)
+  setActiveMessageId: (id: string) => {
+    set({ activeMessageId: id })
+  },
+  editMessage: (text: string) => {
+    set((s) => {
+      if (!s.activeMessageId) return {}
+      const messages = s.messages.map((m) => (m.id === s.activeMessageId ? { ...m, text } : m))
+      return { messages, activeMessageId: null }
+    })
   },
   deleteMessage: (id: string) => {
     set((s) => ({ messages: s.messages.filter((m) => m.id !== id) }))

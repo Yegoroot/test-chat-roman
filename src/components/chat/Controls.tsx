@@ -3,7 +3,7 @@ import { useTeam } from '@/hooks/useTeam'
 import { generateId } from '@/utils/generateId'
 import { FrownOutlined, SendOutlined } from '@ant-design/icons'
 import { Button, Flex, Input } from 'antd'
-import { RefObject, useState } from 'react'
+import { RefObject, useEffect, useState } from 'react'
 
 interface Props {
   messagesEndRef: RefObject<HTMLDivElement>
@@ -11,11 +11,21 @@ interface Props {
 
 export const Controls = ({ messagesEndRef }: Props) => {
   const [text, setText] = useState('')
-  const sendMessage = useTeam((s) => s.sendMessage)
+  const { sendMessage, activeMessageId, messages, editMessage } = useTeam((s) => s)
+
+  useEffect(() => {
+    const message = messages.find((m) => m.id === activeMessageId)
+    setText(message?.text || '')
+  }, [activeMessageId])
+
   const onChange = (e: any) => setText(e.target.value)
 
   const onSend = () => {
-    sendMessage({ id: generateId(), text, user: '001', me: true, date: new Date().toString() }, messagesEndRef)
+    if (activeMessageId) {
+      editMessage(text)
+    } else {
+      sendMessage({ id: generateId(), text, user: '001', me: true, date: new Date().toString() }, messagesEndRef)
+    }
     setText('')
   }
 
