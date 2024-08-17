@@ -4,7 +4,7 @@ import type { MenuProps } from 'antd'
 import { useTeam } from '@/hooks/useTeam'
 import { Participants } from '@/components/Participants'
 import { TeamInfo } from '../TeamInfo'
-import { ContextMenu } from '../ContextMenu'
+import { DotMenu } from '../DotMenu'
 
 const items: MenuProps['items'] = [
   {
@@ -33,7 +33,7 @@ export const Header = () => {
     <Flex style={{ padding: 16, paddingBottom: 0, flexDirection: 'row', justifyContent: 'space-between' }}>
       <Participants participants={participants} />
       <TeamInfo name={teamName} lastseen={lastseen} />
-      <ContextMenu items={items} />
+      <DotMenu items={items} />
     </Flex>
   )
 }
