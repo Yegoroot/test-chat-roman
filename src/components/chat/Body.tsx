@@ -11,8 +11,7 @@ interface Props {
 }
 
 export const Body = ({ messagesEndRef }: Props) => {
-  const { messages, setActiveMessageId, deleteMessage, activeMessageId } = useTeam((s) => s)
-
+  const { messages, setActiveMessageId, deleteMessage } = useTeam((s) => s)
   const contacts = useContacts((s) => s.contacts)
 
   const items = (m: IMessage) => ([
@@ -26,11 +25,9 @@ export const Body = ({ messagesEndRef }: Props) => {
     }
   ]) as MenuProps['items']
 
-  console.log('mes', messages, activeMessageId)
-
   return (
-    <Flex style={{ flexGrow: 1, flexDirection: 'column', paddingTop: 30, paddingBottom: 50, overflow: 'auto' }}>
-      {messages.map((m) => <Message contact={contacts[m.user]} contextMenuItems={items(m)} message={m} />)}
+    <Flex style={{ flexGrow: 1, flexDirection: 'column', paddingTop: 30, paddingBottom: 50, overflow: 'auto', overflowX: 'hidden' }}>
+      {messages.map((m) => <Message contact={contacts[m.user]} key={m.id} contextMenuItems={items(m)} message={m} />)}
       <div ref={messagesEndRef} />
     </Flex>
   )
