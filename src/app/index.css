@@ -133,3 +133,49 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+
+.message {
+  padding: 10px;
+  margin: 4px;
+  border-radius: 10px;
+  display: inline;
+  position: relative;
+}
+
+.message-left {
+  align-self: flex-start;
+  color: #000;
+  left: 20px;
+  background: #f2f2f7;
+}
+
+.message-right {
+  align-self: flex-end;
+  color: #fff;
+  left: -20px;
+  background: #007aff
+}
+
+.message:before {
+  content: "\A";
+  border-style: solid;
+  position: absolute;
+}
+
+.message-right:before {
+  right: -9px;
+  top: -3px;
+  z-index: -1;
+  transform: rotate(-90deg);
+  border-width: 0px 14px 20px 0;
+  border-color: transparent #007aff transparent transparent;
+}
+
+.message-left:before {
+  left: -10px;
+  top: 0px;
+  z-index: -1;
+  border-width: 0px 30px 20px 0;
+  border-color: transparent #f2f2f7 transparent transparent;
+}

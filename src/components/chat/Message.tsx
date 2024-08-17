@@ -2,11 +2,11 @@ import { Message as IMessage } from '@/hooks/useTeam'
 import { Flex } from 'antd'
 
 interface Props {
-  message: IMessage
+  m: IMessage
 }
 
-export const Message = ({ message }: Props) => {
-  console.log('message', message)
-
-  return <Flex>{message.text}</Flex>
-}
+export const Message = ({ m }: Props) => (
+  <Flex className={`message ${m.me ? 'message-right' : 'message-left'}`}>
+    {m.text}
+  </Flex>
+)

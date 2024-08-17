@@ -30,7 +30,7 @@ export const Header = () => {
   const lastseen = useTeam((s) => s.lastseen)
 
   return (
-    <Flex style={{ padding: 16, paddingBottom: 0, justifyContent: 'space-between' }}>
+    <Flex style={{ padding: 16, paddingBottom: 0, flexDirection: 'row', justifyContent: 'space-between' }}>
       <Participants participants={participants} />
       <TeamInfo name={teamName} lastseen={lastseen} />
       <ContextMenu items={items} />

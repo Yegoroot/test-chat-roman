@@ -4,15 +4,15 @@ import React from 'react'
 import { Header } from '@/components/chat/Header'
 import { Body } from '@/components/chat/Body'
 import { Controls } from '@/components/chat/Controls'
-import { Divider } from 'antd'
+import { Divider, Flex } from 'antd'
 
 const Home = () => (
-  <div className="App">
+  <Flex className="App" style={{height: '100vh', overflow: 'hidden', flexDirection: 'column'}}>
     <Header />
     <Divider />
     <Body />
     <Controls />
-  </div>
+  </Flex>
 )
 
 export default Home
