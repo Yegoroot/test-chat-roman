@@ -10,7 +10,7 @@ export const Participants = ({ participants }: {participants: string[]}) => {
     <Avatar.Group style={{ alignItems: 'center' }}>
       { participants.map((p) => {
         const u = contacts[p]
-        return <Avatar src={u.avatar} key={u.id} style={{ backgroundColor: stringToColor(u.name) }}>{u.name[0]}</Avatar>
+        return <Avatar src={u.avatar} key={u.name} style={{ backgroundColor: stringToColor(u.name) }}>{u.name[0]}</Avatar>
       })}
     </Avatar.Group>
   )
